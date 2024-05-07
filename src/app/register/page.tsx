@@ -32,7 +32,7 @@ const RegisterPage = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<IPatientRegisterData>();
     const onSubmit: SubmitHandler<IPatientRegisterData> =async(values)=>{
 
-        const data=modifyPayload(values);
+        const data=modifyPayload("patient",values);
        try{
         const res=await RegisterPatiens(data);
         if(res?.data?.id)
