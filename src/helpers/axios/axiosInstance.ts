@@ -30,10 +30,9 @@ instance.interceptors.response.use(
     //@ts-ignore
     function (response) {
     
-
     const responeObject:ResponseSuccessType={
         data:response?.data?.data,
-        meta:response?.data?.meata
+        meta:response?.data?.meta
 
 
     }

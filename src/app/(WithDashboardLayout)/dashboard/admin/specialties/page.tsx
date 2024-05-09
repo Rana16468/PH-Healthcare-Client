@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 const SpecialtiesPage = () => {
     //https://mui.com/material-ui/react-dialog/
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const {data,isLoading}=useGetAllSpecialtiesQuery(null,{refetchOnMountOrArgChange:true});
+    const {data,isLoading}=useGetAllSpecialtiesQuery({},{refetchOnMountOrArgChange:true});
 
     const [  deleteSpecialties]=useDeleteSpecialtiesMutation();
        
@@ -75,9 +75,11 @@ const SpecialtiesPage = () => {
                 isLoading && <Box>Loaging</Box>
             }
 
-            <Box my={2}>
-                <DataGrid rows={data} columns={columns} hideFooter={true} />
-            </Box>
+           {
+            !isLoading &&  <Box my={2}>
+            <DataGrid rows={data} columns={columns} hideFooter={true} />
+        </Box>
+           }
         </Box>
     );
 };
