@@ -5,9 +5,10 @@ export enum tagTypes
     patient="patient",
     admin="admin",
     superAdmin="superAdmin",
-    schedule="schedule"
+    schedule="schedule",
+    user="user"
 }
 
 export const tagTypesList=[
-    tagTypes.specialties,tagTypes.admin,tagTypes.doctor,tagTypes.patient,tagTypes.superAdmin,tagTypes.schedule
+    tagTypes.specialties,tagTypes.admin,tagTypes.doctor,tagTypes.patient,tagTypes.superAdmin,tagTypes.schedule,tagTypes.user
 ]

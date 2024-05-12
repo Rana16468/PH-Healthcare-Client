@@ -14,6 +14,7 @@ type TFromProps={
 const PHForms = ({children,onSubmit, resolver,defaultValues}:TFromProps) => {
     //https://react-hook-form.com/docs/formprovider
 
+   
 
     const fromConfig:TFromConfig={};
        if(resolver)
@@ -26,6 +27,8 @@ const PHForms = ({children,onSubmit, resolver,defaultValues}:TFromProps) => {
                 fromConfig["defaultValues"]=defaultValues;
 
             }
+
+            
 
     const methods = useForm(fromConfig);
     const submit:SubmitHandler<FieldValues> = (data) => {

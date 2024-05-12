@@ -58,6 +58,12 @@ export const drawerItem=(role:UserRole):DrawerItem[]=>{
                 title: "Reviews",
                 path: `${role}/reviews`,
                 icon: ReviewsIcon,
+              },
+              {
+                title:"Profile",
+                path:`${role}/profile`,
+                icon:ReviewsIcon
+
               }
             );
             break;

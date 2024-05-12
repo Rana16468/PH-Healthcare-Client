@@ -10,6 +10,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import SideBar from '../SideBar/SideBar';
+import { useGetSingleUserQuery } from '@/redux/api/userApi';
+import { Avatar, Badge, Stack } from '@mui/material';
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import AccountMenu from '@/components/AccountMenu/AccountMenu';
 
 const drawerWidth = 240;
 
@@ -19,6 +23,9 @@ export default function DashboardDrawer({children}:{children:React.ReactNode}) {
   
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
+
+
+  const {data,isLoading}=useGetSingleUserQuery({},{refetchOnMountOrArgChange:true});
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -62,15 +69,29 @@ export default function DashboardDrawer({children}:{children:React.ReactNode}) {
           >
             <MenuIcon />
           </IconButton>
-             <Box>
+             <Box sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: "100%",
+            }}>
                 <Typography variant="body2" noWrap component="div" color="gray">
-                  Hi A M Sohel Rana
+                  Hi, {isLoading ? "Loading..." : data?.name},
               </Typography>
 
               <Typography variant="body2" noWrap component="div" color="primary.main">
                  Wel Come To PH Health Care!
               </Typography>
              </Box>
+             <Stack direction="row" gap={3}>
+              <Badge badgeContent={1} color="primary">
+                <IconButton sx={{ background: "#ffffff" }}>
+                  <NotificationsNoneIcon color="action" />
+                </IconButton>
+              </Badge>
+              <Avatar alt={data?.name} src={data?.profilePhoto || " "} />
+              <AccountMenu />
+            </Stack>
         </Toolbar>
       </AppBar>
       <Box

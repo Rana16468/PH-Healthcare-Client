@@ -29,7 +29,7 @@ const specialtiesApi = baseApi.injectEndpoints({
       }),
       //delete Specililist
       deleteSpecialties: build.mutation({
-        query: (id) => {
+        query: (id:string) => {
          return {
            url:`/specialties/${id}`,
            method:"DELETE",

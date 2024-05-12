@@ -8,7 +8,10 @@ export const UserLogin = async(payload:any) => {
             "Content-Type":"application/json",
         },
         body:JSON.stringify(payload),
-        cache:"no-store"
+        // refresh token setting process
+        //cache:"no-cache",
+        credentials:"include"
+       
     });
     const loginInfo=await res.json();
     return loginInfo

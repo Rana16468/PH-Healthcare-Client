@@ -1,6 +1,7 @@
 import { authKey } from "@/contant/authkey";
+import { getNewAccessToken } from "@/services/AuthService/auth.services";
 import { IGenericErrorResponse, ResponseSuccessType } from "@/types/common";
-import { getFromLocalStorage } from "@/utils/LocalStores/LocalStore";
+import { getFromLocalStorage, setLocalStorage } from "@/utils/LocalStores/LocalStore";
 import axios from "axios";
 
 
@@ -37,20 +38,30 @@ instance.interceptors.response.use(
 
     }
     return responeObject;
-  }, function (error) {
+  },async function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
+  
+    const config=error?.config;
 
-    const  responeObject:IGenericErrorResponse={
-
-        
+   if(error?.response?.status===500 && !config?.sent)
+    {
+      config.sent=true
+      const response= await getNewAccessToken();
+      const accessToken=response?.data?.accessToken;
+      config.headers["Authorization"]=accessToken;
+      setLocalStorage(authKey,accessToken);
+      return instance(config);
+    }
+     else{
+      const  responeObject:IGenericErrorResponse={
         statusCode:error?.response?.data?.statusCode || 500,
         message:error?.response?.data?.message || "something went wrong !!",
         errorMessages: error?.response?.data?.message
-
     }
     //return Promise.reject(error);
     return responeObject
+     }
   });
 
 
