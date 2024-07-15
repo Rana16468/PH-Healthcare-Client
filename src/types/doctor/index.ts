@@ -23,3 +23,13 @@ export interface IDoctor {
     doctor: IDoctor;
     password: string;
   }
+
+  export interface ISpecialties {
+    specialtiesId: string;
+    isDeleted?: null;
+ }
+ 
+ export interface IDoctorFormData {
+    doctor: IDoctor;
+    password: string;
+ }

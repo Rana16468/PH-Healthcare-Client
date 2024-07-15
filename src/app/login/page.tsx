@@ -1,5 +1,5 @@
-"use client"
 
+"use client"
 import { Box, Button, Container, Grid, Stack, TextField, Typography } from "@mui/material";
 import assets from '@/assets';
 import Image from "next/image";
@@ -41,7 +41,7 @@ const LoginPage = () => {
             {
                 toast.success(res?.message);
                 storeUserInfo({accessToken:res?.data?.accessToken});
-                   router.push("/dashboard");
+                   //router.push("/dashboard");
                    
                    
              }
@@ -125,9 +125,11 @@ const LoginPage = () => {
                 </Grid>
               </Grid>
 
-              <Typography mb={1} textAlign="end" component="p" fontWeight={300}>
+             <Link href="/forgot-password">
+              <Typography mb={1} textAlign="end" component="p" fontWeight={300} >
                 Forgot Password?
               </Typography>
+             </Link>
 
               <Button
                 sx={{

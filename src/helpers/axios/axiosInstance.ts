@@ -1,5 +1,6 @@
 import { authKey } from "@/contant/authkey";
 import { getNewAccessToken } from "@/services/AuthService/auth.services";
+import setAccessToken from "@/services/actions/setAccessToken";
 import { IGenericErrorResponse, ResponseSuccessType } from "@/types/common";
 import { getFromLocalStorage, setLocalStorage } from "@/utils/LocalStores/LocalStore";
 import axios from "axios";
@@ -41,6 +42,8 @@ instance.interceptors.response.use(
   },async function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
+
+
   
     const config=error?.config;
 
@@ -51,6 +54,7 @@ instance.interceptors.response.use(
       const accessToken=response?.data?.accessToken;
       config.headers["Authorization"]=accessToken;
       setLocalStorage(authKey,accessToken);
+      setAccessToken(accessToken);
       return instance(config);
     }
      else{
