@@ -27,7 +27,16 @@ const TopRatedDoctors = async() => {
           {doctors?.map((doctor: any) => (
             <Grid item key={doctor?.id} md={4}>
              <Card sx={{ maxWidth: 345 }}>
-   <Box >
+   <Box sx={{
+      width: '100%',
+                              height: 300,
+                              '& img': {
+                                 width: '100%',
+                                 height: '100%',
+                                 overflow: 'hidden',
+                                 objectFit: 'cover',
+                              }
+   }}>
     <Image src={doctor?.profilePhoto?doctor?.profilePhoto :"https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg"} alt='doctor' width={500}  height={200}/>
    </Box>
       <CardContent>
@@ -66,6 +75,7 @@ const TopRatedDoctors = async() => {
             sx={{
               marginTop: "20px",
             }}
+            href='/doctors'
           >
             View ALL
           </Button>

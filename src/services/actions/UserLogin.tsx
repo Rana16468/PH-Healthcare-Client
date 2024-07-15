@@ -1,4 +1,6 @@
 
+import setAccessToken from "./setAccessToken";
+
 
 export const UserLogin = async(payload:any) => {
 
@@ -14,6 +16,11 @@ export const UserLogin = async(payload:any) => {
        
     });
     const loginInfo=await res.json();
+    
+         if(loginInfo?.data?.accessToken)
+        {
+           setAccessToken(loginInfo?.data?.accessToken,{redirect:"/dashboard"})
+        }
     return loginInfo
    
 };

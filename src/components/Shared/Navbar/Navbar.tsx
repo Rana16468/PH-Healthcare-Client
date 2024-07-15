@@ -2,16 +2,31 @@
 
 
 
-import { Box, Container, Stack, Typography } from "@mui/material";
+import useUserInfo from "@/hooks/useUserInfo";
+import { getUserInfo } from "@/services/AuthService/auth.services";
+import logoutUser from "@/services/actions/logoutUser";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 
 
 
 //https://mui.com/material-ui/react-stack/
 const Navbar = () => {
 //https://nextjs.org/docs/app/building-your-application/optimizing/lazy-loading
-    const AuthButton= dynamic(() => import('@/components/UI/AuthButton/AuthButton'), { ssr: false })
+    //const AuthButton= dynamic(() => import('@/components/UI/AuthButton/AuthButton'), { ssr: false })
+   
+    const userInfo=  useUserInfo();
+    // console.log("isLoggedIn",isLoggedIn());
+     
+    const router=useRouter();
+    const handelLogOut = () => {
+      
+        logoutUser(router);
+     };
+
     return (
         <Container>
            <Stack py={2} direction="row" justifyContent="space-between" alignItems="center">
@@ -24,9 +39,18 @@ const Navbar = () => {
          <Typography>Diagnostrict</Typography>
          <Typography>NGOs</Typography>
 
+         {
+            userInfo?.email &&   <Typography component={Link} href="/dashboard">Dashboard</Typography>
+         }
+       
+
          
          </Stack>
-            <AuthButton/>
+            {/* <AuthButton/> */}
+
+            {
+            userInfo?.email ? <Button  onClick={handelLogOut}  color="error">LogOut</Button>:<Button component={Link} href="/login">Login</Button>
+           }
            
            </Stack>
 

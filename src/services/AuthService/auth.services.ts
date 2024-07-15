@@ -20,8 +20,13 @@ export const getUserInfo=()=>{
         }
 
     }
+    else{
+        return ""
+    }
    
 }
+
+
 
 export const  isLoggedIn=()=>{
 
